@@ -141,12 +141,23 @@ A Claude Code plugin that transforms your workflow to use persistent markdown fi
 
 ## Quick Install
 
-In Claude Code, run:
+```bash
+npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g
+```
+
+Works with Claude Code, Cursor, Codex, Gemini CLI, and 40+ agents supporting the [Agent Skills](https://agentskills.io) spec.
+
+<details>
+<summary><strong>🔧 Claude Code Plugin (Advanced Features)</strong></summary>
+
+For Claude Code-specific features like `/plan` autocomplete commands:
 
 ```
 /plugin marketplace add OthmanAdi/planning-with-files
 /plugin install planning-with-files@planning-with-files
 ```
+
+</details>
 
 That's it! Now use one of these commands in Claude Code:
 
