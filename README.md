@@ -42,10 +42,11 @@ See the full list of everyone who made this project better in [CONTRIBUTORS.md](
 <details>
 <summary><strong>📦 Releases & Session Recovery</strong></summary>
 
-### Current Version: v2.26.0
+### Current Version: v2.26.1
 
 | Version | Highlights |
 |---------|------------|
+| **v2.26.1** | Fix: session catchup after `/clear` — path sanitization on Windows + content injection (thanks @tony-stark-eth!) |
 | **v2.26.0** | IDE audit: Factory hooks, Copilot errorOccurred hook, Gemini hooks, bug fixes |
 | **v2.18.2** | Mastra Code hooks fix (hooks.json + docs accuracy) |
 | **v2.18.1** | Copilot garbled characters complete fix |
@@ -149,7 +150,7 @@ A Claude Code plugin that transforms your workflow to use persistent markdown fi
 [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Hooks-000000)](https://docs.github.com/en/copilot/reference/hooks-configuration)
 [![Mastra Code](https://img.shields.io/badge/Mastra%20Code-Skills-00BCD4)](https://code.mastra.ai)
 [![BoxLite](https://img.shields.io/badge/BoxLite-Sandbox-6C3483)](https://boxlite.ai)
-[![Version](https://img.shields.io/badge/version-2.26.0-brightgreen)](https://github.com/OthmanAdi/planning-with-files/releases)
+[![Version](https://img.shields.io/badge/version-2.26.1-brightgreen)](https://github.com/OthmanAdi/planning-with-files/releases)
 [![SkillCheck Validated](https://img.shields.io/badge/SkillCheck-Validated-4c1)](https://getskillcheck.com)
 
 ## Quick Install
