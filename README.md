@@ -44,10 +44,11 @@ See the full list of everyone who made this project better in [CONTRIBUTORS.md](
 <details>
 <summary><strong>📦 Releases & Session Recovery</strong></summary>
 
-### Current Version: v2.33.0
+### Current Version: v2.34.0
 
 | Version | Highlights |
 |---------|------------|
+| **v2.34.0** | **Codex hooks fully restored** (closes #132): `.codex/hooks.json` + lifecycle scripts back — SessionStart, UserPromptSubmit, PreToolUse, PostToolUse, Stop. Tessl CI for SKILL.md quality reviews. Exec bit fix. 4 missing contributors added. (thanks @Leon-Algo, @popey!) |
 | **v2.33.0** | **Multi-language expansion**: Arabic, German, and Spanish skill variants added (thanks to community contributors!) |
 | **v2.32.0** | Codex session catchup rewrite (thanks @ebrevdo!), Loaditout A-grade security badge, Stop hook Git Bash fix |
 | **v2.31.0** | Codex hooks.json integration with full lifecycle hooks (thanks @Leon-Algo!) |
