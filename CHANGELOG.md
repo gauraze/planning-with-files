@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.36.2] - 2026-05-01
+
+### Fixed
+
+- **Canonical skill copy missing slug-mode init-session** (PR #149 by @voidborne-d): `skills/planning-with-files/scripts/init-session.sh` and `init-session.ps1` were not updated when slug mode shipped in v2.36.0. Users installing via `npx skills add` or any of the nine IDE folders received the legacy-only v2.0.0 script, silently missing the parallel plan isolation feature. Fixed by syncing the top-level canonical scripts into the skill directory and all IDE mirrors.
+- **Shebang drift in IDE mirror scripts**: `check-complete.sh` in `.codebuddy/`, `.codex/`, `.continue/`, `.factory/`, `.gemini/`, `.pi/` folders still used `#!/bin/bash`. Synced to `#!/usr/bin/env bash` to match the Emin017 fix from v2.35.1.
+- **Analytics template gap in canonical PS1**: `init-session.ps1` in the canonical skill copy lacked the `--template analytics` support added in v2.29.0 by @mvanhorn. Included in this sync.
+
+### Added
+
+- **Regression test** `tests/test_canonical_script_sync.py`: asserts `init-session.{sh,ps1}` and `check-complete.{sh,ps1}` are byte-identical between `scripts/` and `skills/planning-with-files/scripts/`. A second assertion invokes `sync-ide-folders.py --verify` to catch IDE mirror drift in CI. Prevents this class of silent version mismatch from recurring.
+
+### Changed
+
+- Version bumped to 2.36.2 across 14 SKILL.md variants, `plugin.json`, `marketplace.json`, and `CITATION.cff`
+- `CONTRIBUTORS.md` updated: added @voidborne-d (PR #149)
+
+### Thanks
+
+- @voidborne-d for catching the canonical/top-level script drift, providing grep proof, running the sync tool, and adding the regression test that prevents recurrence (PR #149)
+
 ## [2.36.1] - 2026-05-01
 
 ### Security

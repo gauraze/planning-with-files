@@ -234,6 +234,12 @@ Thank you to everyone who reported issues, provided feedback, and helped test fi
 
 And many others who have starred, forked, and shared this project!
 
+- **[@voidborne-d](https://github.com/voidborne-d)** - [PR #149](https://github.com/OthmanAdi/planning-with-files/pull/149)
+  - Caught that `skills/planning-with-files/scripts/init-session.sh` was not updated when slug mode shipped in v2.36.0, meaning users installing via npx or IDE folders silently received the old script
+  - Identified the same gap in the analytics template (v2.29.0) and the shebang drift from v2.35.1 across IDE mirror folders
+  - Synced the canonical skill copy and all IDE mirrors using the existing `sync-ide-folders.py` tool, and added a byte-comparison regression test plus a `--verify` CI assertion to prevent recurrence
+  - **Impact:** v2.36.0 headline feature (parallel plan isolation) now actually reaches users who install via the skill; regression test closes the drift class permanently
+
 ## How to Contribute
 
 We welcome contributions! Here's how you can help:
@@ -252,6 +258,6 @@ If you've contributed and don't see your name here, please open an issue! We wan
 
 ---
 
-**Total Contributors:** 39+ and growing!
+**Total Contributors:** 40+ and growing!
 
 *Last updated: May 1, 2026*
