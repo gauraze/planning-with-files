@@ -115,6 +115,22 @@ These amazing people have contributed code, documentation, or significant improv
   - PR #139: preferred known system Python paths over unqualified PATH resolution in `session-start.sh`, `pre-tool-use.sh`, and `error-occurred.sh`
   - **Impact:** Hardened the Copilot hook scripts and the Pi variant in one coordinated audit pass
 
+- **[@githubYiheng](https://github.com/githubYiheng)** - [Issue #146](https://github.com/OthmanAdi/planning-with-files/issues/146)
+  - Reported Codex session isolation failure: any Codex session in a shared working directory received the active plan context from an unrelated session, because the hooks keyed only on `task_plan.md` presence
+  - Traced the code path through `user-prompt-submit.sh`, `pre_tool_use.py`, and `stop.py`, and proposed the session attachment model as a fix direction
+  - **Impact:** Led to `$PWF_SESSION_ID` + sentinel file isolation, backward-compatible upgrade path, and 5 new targeted tests
+
+- **[@09ashishkapoor](https://github.com/09ashishkapoor)** - [Issue #147](https://github.com/OthmanAdi/planning-with-files/issues/147)
+  - Filed a detailed Hermes documentation gap report: the integration worked but docs implied feature parity with hook-native platforms, leading to user confusion when stop/block behavior differed
+  - Outlined the four sections needed (what works, what is not equivalent, recommended pattern, tradeoffs) with enough specificity to write from directly
+  - **Impact:** `docs/hermes.md` now has an `Integration Notes` section that sets accurate expectations for Hermes adopters
+
+- **[@shawnli1874](https://github.com/shawnli1874)** - [Issue #148](https://github.com/OthmanAdi/planning-with-files/issues/148)
+  - Reported that v2.0.0 hooks broke parallel multi-task workflows by hardcoding `task_plan.md` at the project root, removing the placement flexibility that CLAUDE.md conventions had previously allowed
+  - Provided a concrete reproduction with anonymized task files showing how parallel sessions contaminated each other after a few hours of work
+  - Proposed the `YYYY-MM-DD-<slug>/` naming convention as a human-readable alternative to the UUID approach in `experimental/isolated-planning`
+  - **Impact:** Slug-based `init-session.sh`, `set-active-plan.sh`, `resolve-plan-dir.sh`, and the full Codex hook resolver wire-up all trace back to this report
+
 - **[@Leon-Algo](https://github.com/Leon-Algo)** - [PR #119](https://github.com/OthmanAdi/planning-with-files/pull/119), [PR #120](https://github.com/OthmanAdi/planning-with-files/pull/120), [PR #122](https://github.com/OthmanAdi/planning-with-files/pull/122)
   - Made planning scripts executable in `.codex` skill install, fixing Codex installer breakage (PR #119)
   - Added official Codex hooks.json integration with full lifecycle hooks — SessionStart, UserPromptSubmit, PreToolUse, PostToolUse, Stop — bringing Codex to full hook parity with other IDEs (PR #120)
@@ -236,6 +252,6 @@ If you've contributed and don't see your name here, please open an issue! We wan
 
 ---
 
-**Total Contributors:** 37+ and growing!
+**Total Contributors:** 39+ and growing!
 
-*Last updated: April 29, 2026*
+*Last updated: May 1, 2026*

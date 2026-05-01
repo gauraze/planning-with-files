@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.36.0] - 2026-05-01
+
+### Added
+
+- **Parallel plan isolation** (Issue #148 by @shawnli1874): `init-session.sh` now accepts a task name and creates a dated, readable plan directory under `.planning/YYYY-MM-DD-<slug>/`. Each parallel task gets its own isolated directory, ending the cross-contamination that v2.0.0 hooks introduced by hardcoding `task_plan.md` at the project root. Legacy zero-argument behavior is unchanged. New `set-active-plan.sh` and `set-active-plan.ps1` let users explicitly switch between plans without exporting `PLAN_ID`. New `resolve-plan-dir.sh` and `resolve-plan-dir.ps1` provide the resolution chain: `$PLAN_ID` env var, then `.planning/.active_plan`, then the newest plan directory by mtime, then empty (legacy fallback). All four Codex lifecycle hooks (UserPromptSubmit, PreToolUse, PostToolUse, Stop) now route through the resolver instead of assuming a root-level `task_plan.md`.
+- **Codex session isolation** (Issue #146 by @githubYiheng): Codex sessions in a shared working directory no longer receive plan context from unrelated sessions. Attachment is opt-in: create `.planning/sessions/<session_id>.attached` to bind a session to the active plan. `user-prompt-submit.sh`, `pre_tool_use.py`, `stop.py`, and `post_tool_use.py` all gate on session attachment before injecting context or blocking. Backward compatible: absence of `.planning/sessions/` preserves existing single-session behavior.
+- **Hermes integration notes** (Issue #147 by @09ashishkapoor): `docs/hermes.md` gains an `Integration Notes` section that separates what the adapter provides today from what is not full parity with hook-native platforms. Covers current support level, recommended integration pattern, and a tradeoffs table. Reduces confusion for users migrating from Claude Code hook workflows.
+- **34 new tests**: `tests/test_resolve_plan_dir.py` (7), `tests/test_init_session_slug.py` (6), `tests/test_hook_resolver_integration.py` (10), `tests/test_codex_session_isolation.py` (5), `tests/test_set_active_plan.py` (6).
+
+### Fixed
+
+- **`resolve_latest_dir` skips non-plan directories**: auto-discovery previously matched any subdirectory under `.planning/`, including the new `sessions/` directory. It now requires `task_plan.md` to be present, preventing session isolation from silently breaking when both features are active.
+- **`short_uuid()` bypasses Windows App Execution Aliases**: the function now probes each Python candidate with a test run before trusting `command -v`, avoiding the case where the Windows Store alias reports presence but exits non-zero.
+
+### Changed
+
+- Version bumped to 2.36.0 across 14 SKILL.md variants, `plugin.json`, `marketplace.json`, and `CITATION.cff`
+- `CONTRIBUTORS.md` updated: added @githubYiheng (Issue #146), @09ashishkapoor (Issue #147), @shawnli1874 (Issue #148); total count now 39+
+
+### Thanks
+
+- @githubYiheng for tracing the session boundary problem down to its exact code path and proposing the session attachment model (Issue #146)
+- @09ashishkapoor for the clear documentation gap report and the four-section structure that made writing the fix straightforward (Issue #147)
+- @shawnli1874 for the detailed parallel workflow breakdown, the concrete reproduction case, and the slug naming proposal that shaped the final design (Issue #148)
+
 ## [2.35.0] - 2026-04-21
 
 ### Added
