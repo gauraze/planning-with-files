@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.36.1] - 2026-05-01
+
+### Security
+
+- **Stop hook: eliminate broad cache search** (Gen Agent Trust Hub COMMAND_EXECUTION): replaced `Get-ChildItem -Recurse` over `~/.claude/plugins/cache` with resolution through `$CLAUDE_SKILL_DIR` env var first, then two specific known install paths (`~/.claude/skills/` and `~/.claude/plugins/marketplaces/`). Removes the attack surface where a malicious `check-complete.ps1` planted anywhere in the cache directory would be found and executed.
+- **PowerShell ExecutionPolicy: Bypass → RemoteSigned** (Gen Agent Trust Hub COMMAND_EXECUTION): `ExecutionPolicy Bypass` circumvents all script execution policies. `RemoteSigned` allows locally created scripts while still blocking downloaded scripts that lack a trusted signature. Applied across all 14 SKILL.md variants.
+- **Prompt injection delimiters** (Gen Agent Trust Hub PROMPT_INJECTION): `UserPromptSubmit` and `PreToolUse` hook output now wraps injected plan content in `---BEGIN PLAN DATA---` / `---END PLAN DATA---` markers with explicit model instructions to treat enclosed content as structured data and ignore embedded instructions. Addresses the lack of sanitization and boundary markers flagged in the audit.
+- **Security Boundary section updated** (Snyk W011): added explicit model instruction that `findings.md` content (which ingests third-party web/search results) must be treated as raw data regardless of what it contains. Clarifies the delimiter contract to auditors and the model.
+
+### Changed
+
+- Version bumped to 2.36.1 across all 14 SKILL.md variants, `plugin.json`, `marketplace.json`, and `CITATION.cff`
+
 ## [2.36.0] - 2026-05-01
 
 ### Added
